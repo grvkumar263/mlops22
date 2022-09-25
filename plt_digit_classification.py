@@ -8,7 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 
-def preprocess_digits(dataset):
+def prepros_data(dataset):
     # PART: data pre-processing -- to normlize data, to remove noice,
     #                               formate the data tobe consumed by model
     n_samples = len(dataset.images)
@@ -26,7 +26,7 @@ def data_viz(dataset):
         ax.set_title("Training: %i" % label)
 
 
-def train_dev_test_split(data, label, train_frac, dev_frac, test_frac):
+def train_test_dev(data, label, train_frac, dev_frac, test_frac):
     dev_test_frac = 1- train_frac
     X_train, X_dev_test, y_train, y_dev_test = train_test_split(
         data, label, test_size=dev_test_frac, shuffle=True
@@ -93,7 +93,7 @@ dev_frac = 0.1
 # PART: -load dataset --data from files, csv, tsv, json, pickle
 digits = datasets.load_digits()
 data_viz(digits)
-data, label = preprocess_digits(digits)
+data, label = prepros_data(digits)
 
 # housekeeping
 del digits
@@ -112,7 +112,7 @@ del digits
 # the goodness of the model. 
 # We want to test on "unseen" sample. 
 
-X_train, y_train, X_dev, y_dev, X_test, y_test = train_dev_test_split(
+X_train, y_train, X_dev, y_dev, X_test, y_test = train_test_dev(
     data, label, train_frac, dev_frac, test_frac
 )
   
